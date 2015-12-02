@@ -10,6 +10,7 @@ public class App
     {
         System.out.println( "Hello World!" );
         Simulateur simu = new Simulateur();
-        simu.demarrer_simulation();
+        GenerateurParDefaut parametre_par_defaut = new GenerateurParDefaut();
+        simu.demarrer_simulation(parametre_par_defaut.get_liste_robot_par_defaut(), parametre_par_defaut.get_carte_par_defaut());
     }
 }
