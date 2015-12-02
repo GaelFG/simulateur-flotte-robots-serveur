@@ -25,6 +25,7 @@ public class Simulateur {
 			for (Robot r : liste_robots)
 				r.agir();
 			afficher_etat_simu();
+			simulation_pas_finie = false;
 		}
 	}
 

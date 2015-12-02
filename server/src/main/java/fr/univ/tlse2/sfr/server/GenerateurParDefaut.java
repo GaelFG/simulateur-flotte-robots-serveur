@@ -17,8 +17,8 @@ public class GenerateurParDefaut {
 	//méthode retournant la liste des robots
 	public static List<Robot> get_liste_robot_par_defaut(){
 		List<Robot> liste_robots = new LinkedList<Robot>();
-		liste_robots.add(new Robot(1, new Position(0.0,0.0),0, 1.0));
-		liste_robots.add(new Robot(2, new Position(1.0,1.0),1, 1.0));
+		liste_robots.add(new Robot(1, new Position(0.0,0.0),45, 1.0));
+		liste_robots.add(new Robot(2, new Position(1.0,1.0),45, 1.0));
 		return liste_robots;
 	}
 	

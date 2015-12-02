@@ -48,9 +48,10 @@ public class Robot {
 		double futur_x;
 		double futur_y; 
 		
-		futur_x = this.pos_robot.get_x();
-		futur_y = this.pos_robot.get_y(); 		
+		futur_x = this.pos_robot.get_x() + Math.sin(this.orientation_robot) * vitesse;
+		futur_y = this.pos_robot.get_y() + Math.sin(90 - this.orientation_robot) * vitesse; 		
 		
+		this.pos_robot = new Position(futur_x, futur_y);
 	}
 
 	private void determiner_nouvelle_orientation() {
