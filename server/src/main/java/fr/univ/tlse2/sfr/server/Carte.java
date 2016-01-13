@@ -6,7 +6,7 @@ public class Carte {
 	private int hauteur;
 	
 	public Carte(){
-		this.nom_carte = "Carte par défaut";
+		this.nom_carte = "Carte par defaut";
 		this.largeur = 2;
 		this.hauteur = 2;
 	}

@@ -12,8 +12,9 @@ public class Robot {
 	private double vitesse;
 	private Random random_orientation;
 	private int coef_orientation;
+	private Simulateur simulation;
 	
-	//constructeur par défaut
+	//constructeur par defaut
 	public Robot(){
 		this.id_robot = 0;
 		this.pos_robot = new Position(0.0,0.0);
@@ -21,12 +22,13 @@ public class Robot {
 		this.vitesse = 1;
 	}
 	
-	//constructeur avec paramètre
-	public Robot(int id, Position pos, int orientation, double vitesse){
+	//constructeur avec parametre
+	public Robot(int id, Position pos, int orientation, double vitesse, Simulateur simulation){
 		this.id_robot = id;
 		this.pos_robot = pos;
 		this.orientation_robot = orientation;
 		this.vitesse = vitesse;
+		this.simulation = simulation;
 	}
 
 	//getteur id_robot
@@ -55,9 +57,15 @@ public class Robot {
 		
 		futur_x = this.pos_robot.get_x() + Math.cos(Math.toRadians(orientation_robot)) * vitesse;
 		futur_y = this.pos_robot.get_y() + Math.sin(Math.toRadians(orientation_robot)) * vitesse;
-		this.pos_robot.set_x(futur_x);
-		this.pos_robot.set_y(futur_y);
 		
+		for (Robot r : this.simulation.getListe_robots()){
+			if (this.id_robot != r.id_robot){
+				if ((futur_x > r.pos_robot.get_x() - 1 && futur_x < r.pos_robot.get_x() + 1) || (futur_y > r.pos_robot.get_y() - 1 && futur_y < r.pos_robot.get_y() + 1)){
+					futur_x = this.pos_robot.get_x();
+					futur_y = this.pos_robot.get_y();
+				}		
+			}
+		}		
 		this.pos_robot = new Position(futur_x, futur_y);
 	}
 
@@ -74,7 +82,5 @@ public class Robot {
 			this.orientation_robot = (orientation_robot + 30) % 360;
 		else if (96 <= this.coef_orientation && this.coef_orientation <= 100)
 			this.orientation_robot = (orientation_robot + 60) % 360;
-	}
-	
-	
+	}	
 }
