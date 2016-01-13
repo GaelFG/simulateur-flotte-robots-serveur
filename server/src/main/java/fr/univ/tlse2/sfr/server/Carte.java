@@ -1,5 +1,7 @@
 package fr.univ.tlse2.sfr.server;
 
+import fr.univ.tlse2.sfr.communication.EtatCarte;
+
 public class Carte {
 	private String nom_carte;
 	private int largeur;
@@ -15,5 +17,10 @@ public class Carte {
 		this.nom_carte = nom;
 		this.largeur = p_largeur;
 		this.hauteur = p_hauteur;
+	}
+
+	public EtatCarte calculer_etat_carte() {
+		// TODO Auto-generated method stub
+		return new EtatCarte(nom_carte, largeur, hauteur);
 	}
 }

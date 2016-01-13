@@ -13,19 +13,28 @@ import fr.univ.tlse2.sfr.communication.MessageTexte;
 public class ProgrammeServeur {
 	
 	private Server serveur_kryo;
+	private Simulateur simulateur;
 	
 	public ProgrammeServeur() {
 		initialiser_serveur_kryo(8073);
 		definir_ecouteur_serveur_kryo();
-		while (true) {
-			try {
-				wait(10);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+		simulateur = new Simulateur();
+	}
+
+	public void run() {
+		GenerateurParDefaut parametre_par_defaut = new GenerateurParDefaut(simulateur);
+        simulateur.initialiser_simulation(parametre_par_defaut.get_liste_robot_par_defaut(), parametre_par_defaut.get_carte_par_defaut());
+        while (true) {
+        	simulateur.faire_evoluer();
+        	serveur_kryo.sendToAllTCP(simulateur.calculer_etat_simulation());
+			try { 
+				wait(100); 
+				} catch (Exception e) {
+				
 			}
 		}
 	}
-
+	
 	private void initialiser_serveur_kryo(int port_tcp) {
 		serveur_kryo = new Server();
 		serveur_kryo.start();
@@ -36,6 +45,8 @@ public class ProgrammeServeur {
 			e.printStackTrace();
 		}
 	}
+	
+	/** L'ecouteur définit la facon dont le serveur éagit aux messages clients recus. */
 	private void definir_ecouteur_serveur_kryo() {
 		serveur_kryo.addListener(new Listener() {
 		       public void received (Connection connection, Object object) {
