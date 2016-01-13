@@ -14,7 +14,7 @@ public class GenerateurParDefaut {
 		//map = get_carte_par_defaut();
 	}
 	
-	//méthode retournant la liste des robots
+	//mÃ©thode retournant la liste des robots
 	public static List<Robot> get_liste_robot_par_defaut(){
 		List<Robot> liste_robots = new LinkedList<Robot>();
 		liste_robots.add(new Robot(1, new Position(0.0,0.0),45, 1.0));
@@ -22,7 +22,7 @@ public class GenerateurParDefaut {
 		return liste_robots;
 	}
 	
-	//méthode retournant une carte par défaut
+	//mÃ©thode retournant une carte par dÃ©faut
 	public static Carte get_carte_par_defaut(){
 		Carte carte = new Carte();
 		return carte;
