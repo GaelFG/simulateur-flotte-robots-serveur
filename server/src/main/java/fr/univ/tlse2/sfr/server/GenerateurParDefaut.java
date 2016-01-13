@@ -24,7 +24,7 @@ public class GenerateurParDefaut {
 		return liste_robots;
 	}
 	
-	//methode retournant une carte par d�faut
+	//méthode retournant une carte par défaut
 	public static Carte get_carte_par_defaut(){
 		Carte carte = new Carte();
 		return carte;
