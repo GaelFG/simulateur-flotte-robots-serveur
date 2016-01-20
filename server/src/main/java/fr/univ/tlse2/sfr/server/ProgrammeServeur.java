@@ -16,6 +16,9 @@ public class ProgrammeServeur {
 	
 	private Server serveur_kryo;
 	private Simulateur simulateur;
+	/** Le framerate du serveur, baissé pour les tests*/
+	private static int FRAMERATE = 3;
+	private static int TEMPS_ENTRE_DEUX_FRAMES = 1000/FRAMERATE;
 	
 	public ProgrammeServeur() {
 		initialiser_serveur_kryo(8073);
@@ -27,13 +30,16 @@ public class ProgrammeServeur {
 		GenerateurParDefaut parametre_par_defaut = new GenerateurParDefaut(simulateur);
         simulateur.initialiser_simulation(parametre_par_defaut.get_robots(), parametre_par_defaut.get_carte());
         while (true) {
+        	/////////////////////////////////////////////////////////////////
         	simulateur.faire_evoluer();
         	serveur_kryo.sendToAllTCP(simulateur.calculer_etat_simulation());
-			try { 
-				wait(100); 
-				} catch (Exception e) {
-				
+			try {
+				Thread.sleep(TEMPS_ENTRE_DEUX_FRAMES);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
+			///////////////////////////////////////////////
 		}
 	}
 	
