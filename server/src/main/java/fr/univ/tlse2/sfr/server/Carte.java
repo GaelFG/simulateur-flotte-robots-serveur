@@ -4,13 +4,21 @@ import fr.univ.tlse2.sfr.communication.EtatCarte;
 
 public class Carte {
 	private String nom_carte;
-	private int largeur;
-	private int hauteur;
+	private double largeur;
+	private double hauteur;
 	
+	public double get_largeur() {
+		return largeur;
+	}
+
+	public double get_hauteur() {
+		return hauteur;
+	}
+
 	public Carte(){
 		this.nom_carte = "Carte par défaut";
-		this.largeur = 2;
-		this.hauteur = 2;
+		this.largeur = 20;
+		this.hauteur = 20;
 	}
 	
 	public Carte(String nom, int p_largeur, int p_hauteur){

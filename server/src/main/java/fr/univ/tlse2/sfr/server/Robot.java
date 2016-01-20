@@ -56,17 +56,30 @@ public class Robot {
 		double futur_x;
 		double futur_y; 
 		
-		futur_x = this.position.get_x() + Math.cos(Math.toRadians(orientation)) * vitesse;
-		futur_y = this.position.get_y() + Math.sin(Math.toRadians(orientation)) * vitesse;
+		futur_x = this.position.x + Math.cos(Math.toRadians(orientation)) * vitesse;
+		futur_y = this.position.y + Math.sin(Math.toRadians(orientation)) * vitesse;
 		
 		for (Robot r : this.simulation.getListe_robots()){
 			if (this.id != r.id){
-				if ((futur_x > r.position.get_x() - 1 && futur_x < r.position.get_x() + 1) || (futur_y > r.position.get_y() - 1 && futur_y < r.position.get_y() + 1)){
-					futur_x = this.position.get_x();
-					futur_y = this.position.get_y();
+				if ((futur_x > r.position.x - 0.1 && futur_x < r.position.x + 0.1) || (futur_y > r.position.y - 0.1 && futur_y < r.position.y + 0.1)){
+					futur_x = this.position.x;
+					futur_y = this.position.y;
 				}		
 			}
-		}		
+		}	
+		while (futur_x > this.simulation.get_carte().get_largeur()){
+			futur_x = futur_x - this.simulation.get_carte().get_largeur();
+		}
+		while (futur_x < 0){
+			futur_x = futur_x + this.simulation.get_carte().get_largeur();
+		}
+		while (futur_y > this.simulation.get_carte().get_hauteur()){
+			futur_y = futur_y - this.simulation.get_carte().get_hauteur();
+		}
+		while (futur_y < 0){
+			futur_y = futur_y + this.simulation.get_carte().get_hauteur();
+		}
+			
 		this.position = new Position(futur_x, futur_y);
 	}
 

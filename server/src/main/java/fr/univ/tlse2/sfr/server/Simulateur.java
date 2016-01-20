@@ -17,6 +17,10 @@ public class Simulateur {
 		return robots;
 	}
 	
+	public Carte get_carte(){
+		return carte;
+	}
+	
 	public void demarrer_simulation(List<Robot> liste, Carte map) {
 		initialiser_simulation(liste, map);
 		while ( simulation_pas_finie ) {
@@ -47,7 +51,7 @@ public class Simulateur {
 	public void afficher_etat_simulation() {
 		for (Robot robot : robots){
 			System.out.println("Information robot " + robot.getId_robot());
-			System.out.println("x=" + robot.getPos_robot().get_x() + " y=" + robot.getPos_robot().get_y());
+			System.out.println("x=" + robot.getPos_robot().x + " y=" + robot.getPos_robot().y);
 			System.out.println(robot.getOrientation_robot());
 		}
 	}
