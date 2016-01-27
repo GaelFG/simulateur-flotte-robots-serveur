@@ -15,7 +15,7 @@ public class GenerateurParDefaut {
 		this.simulation = simu;
 		carte = new Carte();
 		robots = new LinkedList<Robot>();
-		robots.add(new Robot(1, new Position(0.0,0.0),45, 1.0, simulation));
+		robots.add(new Robot(1, new Position(3.0,3.0),45, 1.0, simulation));
 		robots.add(new Robot(2, new Position(1.0,1.0),45, 1.0, simulation));
 		obstacles = new LinkedList<Obstacle>();
 		obstacles.add(new Obstacle(1, new Position(3.0,3.0)));

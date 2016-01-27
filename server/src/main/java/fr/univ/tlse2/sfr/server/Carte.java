@@ -17,8 +17,8 @@ public class Carte {
 
 	public Carte(){
 		this.nom_carte = "Carte par défaut";
-		this.largeur = 50;
-		this.hauteur = 50;
+		this.largeur = 120;
+		this.hauteur = 60;
 	}
 	
 	public Carte(String nom, int p_largeur, int p_hauteur){

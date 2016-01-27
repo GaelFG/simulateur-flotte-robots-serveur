@@ -3,6 +3,7 @@ package fr.univ.tlse2.sfr.server;
 import java.util.LinkedList;
 import java.util.List;
 
+import fr.univ.tlse2.sfr.communication.EtatObstacle;
 import fr.univ.tlse2.sfr.communication.EtatRobot;
 import fr.univ.tlse2.sfr.communication.EtatSimulation;
 
@@ -54,6 +55,10 @@ public class Simulateur {
 		LinkedList<EtatRobot> liste_etats_robots = new LinkedList<EtatRobot>();
 		for (Robot robot : robots){
 			liste_etats_robots.add(robot.calculer_etat_robot());
+		}
+		LinkedList<EtatObstacle> liste_etats_obstacles = new LinkedList<EtatObstacle>();
+		for (Obstacle obstacle : obstacles){
+			liste_etats_obstacles.add(obstacle.calculer_etat_obstacle());
 		}
 		return new EtatSimulation(carte.calculer_etat_carte(), liste_etats_robots);
 	}
