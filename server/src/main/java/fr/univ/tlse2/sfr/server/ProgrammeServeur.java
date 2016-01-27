@@ -17,7 +17,7 @@ public class ProgrammeServeur {
 	private Server serveur_kryo;
 	private Simulateur simulateur;
 	/** Le framerate du serveur, baissé pour les tests*/
-	private static int FRAMERATE = 3;
+	private static int FRAMERATE = 60;
 	private static int TEMPS_ENTRE_DEUX_FRAMES = 1000/FRAMERATE;
 	
 	public ProgrammeServeur() {

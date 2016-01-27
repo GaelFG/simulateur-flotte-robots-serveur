@@ -47,7 +47,6 @@ public class Simulateur {
 	public void faire_evoluer() {
 		for (Robot robot : robots)
 			robot.agir();
-		afficher_etat_simulation();
 		//simulation_pas_finie = false;
 	}
 	
@@ -57,17 +56,5 @@ public class Simulateur {
 			liste_etats_robots.add(robot.calculer_etat_robot());
 		}
 		return new EtatSimulation(carte.calculer_etat_carte(), liste_etats_robots);
-	}
-	
-	public void afficher_etat_simulation() {
-		for (Robot robot : robots){
-			System.out.println("Information robot " + robot.getId_robot());
-			System.out.println("x=" + robot.getPos_robot().x + " y=" + robot.getPos_robot().y);
-			System.out.println(robot.getOrientation_robot());
-		}
-		for (Obstacle obstacle : obstacles){
-			System.out.println("Information obstacle \ntaille : " + obstacle.getTaille());
-			System.out.println("x=" + obstacle.getPosition().x + " y=" + obstacle.getPosition().y);
-		}
 	}
 }
