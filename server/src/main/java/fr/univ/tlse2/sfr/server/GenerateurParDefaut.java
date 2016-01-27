@@ -34,8 +34,8 @@ public class GenerateurParDefaut {
 		robots.add(new Robot(2, new Position(1.0,9.0),45, 0.5, simulation));
 		
 		obstacles = new LinkedList<Obstacle>();
-		obstacles.add(new Obstacle(1, new Position(3.0,3.0)));
-		obstacles.add(new Obstacle(1, new Position(4.0,2.0)));
+		obstacles.add(new Obstacle(1, new Position(10.0,3.0)));
+		obstacles.add(new Obstacle(1, new Position(4.0,12.0)));
 	}
 	
 	//methode retournant la liste des robots

@@ -69,7 +69,7 @@ public class Robot {
 		}	
 		
 		for (Obstacle o : this.simulation.get_liste_obstacles()){
-			if ((futur_x > o.getPosition().x - 0.5 && futur_x < o.getPosition().x + 0.5) || (futur_y > o.getPosition().y - 0.5 && futur_y < o.getPosition().y + 0.5)){
+			if ((futur_x > o.getPosition().x - 1 && futur_x < o.getPosition().x + 1) || (futur_y > o.getPosition().y - 1 && futur_y < o.getPosition().y + 1)){
 				futur_x = this.position.x;
 				futur_y = this.position.y;
 			}		

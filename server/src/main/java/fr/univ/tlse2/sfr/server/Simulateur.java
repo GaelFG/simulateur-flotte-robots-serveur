@@ -60,6 +60,6 @@ public class Simulateur {
 		for (Obstacle obstacle : obstacles){
 			liste_etats_obstacles.add(obstacle.calculer_etat_obstacle());
 		}
-		return new EtatSimulation(carte.calculer_etat_carte(), liste_etats_robots);
+		return new EtatSimulation(carte.calculer_etat_carte(), liste_etats_robots, liste_etats_obstacles);
 	}
 }
