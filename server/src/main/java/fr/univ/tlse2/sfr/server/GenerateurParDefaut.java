@@ -15,8 +15,24 @@ public class GenerateurParDefaut {
 		this.simulation = simu;
 		carte = new Carte();
 		robots = new LinkedList<Robot>();
-		robots.add(new Robot(1, new Position(3.0,3.0),45, 1.0, simulation));
-		robots.add(new Robot(2, new Position(1.0,1.0),45, 1.0, simulation));
+
+		robots.add(new Robot(1, new Position(0.0,0.0),45, 0.5, simulation));
+		robots.add(new Robot(2, new Position(1.0,1.0),45, 0.5, simulation));
+		
+		robots.add(new Robot(2, new Position(3.0,1.0),45, 0.5, simulation));
+		robots.add(new Robot(2, new Position(2.0,1.0),45, 0.5, simulation));
+		robots.add(new Robot(2, new Position(4.0,1.0),45, 0.5, simulation));
+		robots.add(new Robot(2, new Position(5.0,1.0),45, 0.5, simulation));
+		robots.add(new Robot(2, new Position(6.0,1.0),45, 0.5, simulation));
+		robots.add(new Robot(2, new Position(7.0,1.0),45, 0.5, simulation));
+		robots.add(new Robot(2, new Position(8.0,1.0),45, 0.5, simulation));
+		robots.add(new Robot(2, new Position(9.0,1.0),45, 0.5, simulation));
+		robots.add(new Robot(2, new Position(10.0,1.0),45, 0.5, simulation));
+		robots.add(new Robot(2, new Position(11.0,1.0),45, 0.5, simulation));
+		robots.add(new Robot(2, new Position(1.0,5.0),45, 0.5, simulation));
+		robots.add(new Robot(2, new Position(1.0,7.0),45, 0.5, simulation));
+		robots.add(new Robot(2, new Position(1.0,9.0),45, 0.5, simulation));
+		
 		obstacles = new LinkedList<Obstacle>();
 		obstacles.add(new Obstacle(1, new Position(3.0,3.0)));
 		obstacles.add(new Obstacle(1, new Position(4.0,2.0)));
