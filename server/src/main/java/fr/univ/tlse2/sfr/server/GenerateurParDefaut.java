@@ -7,6 +7,7 @@ import fr.univ.tlse2.sfr.communication.Position;
 
 public class GenerateurParDefaut {
 	private List<Robot> robots;
+	private List<Obstacle> obstacles;
 	private Carte carte;
 	private Simulateur simulation;
 	
@@ -16,6 +17,9 @@ public class GenerateurParDefaut {
 		robots = new LinkedList<Robot>();
 		robots.add(new Robot(1, new Position(0.0,0.0),45, 1.0, simulation));
 		robots.add(new Robot(2, new Position(1.0,1.0),45, 1.0, simulation));
+		obstacles = new LinkedList<Obstacle>();
+		obstacles.add(new Obstacle(1, new Position(3.0,3.0)));
+		obstacles.add(new Obstacle(1, new Position(4.0,2.0)));
 	}
 	
 	//methode retournant la liste des robots
@@ -26,5 +30,10 @@ public class GenerateurParDefaut {
 	//méthode retournant une carte par défaut
 	public Carte get_carte(){
 		return carte;
+	}
+	
+	//méthode retournant la liste des obstacles
+	public List<Obstacle> get_obstacles(){
+		return obstacles;
 	}
 }

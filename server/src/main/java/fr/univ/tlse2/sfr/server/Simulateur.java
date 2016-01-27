@@ -8,6 +8,7 @@ import fr.univ.tlse2.sfr.communication.EtatSimulation;
 
 public class Simulateur {
 	private List<Robot> robots;
+	private List<Obstacle> obstacles;
 	private Boolean simulation_pas_finie = true;
 	private Carte carte;
 	
@@ -15,6 +16,10 @@ public class Simulateur {
 	
 	public List<Robot> getListe_robots() {
 		return robots;
+	}
+	
+	public List<Obstacle> get_liste_obstacles(){
+		return obstacles;
 	}
 	
 	public Carte get_carte(){
@@ -31,6 +36,12 @@ public class Simulateur {
 	public void initialiser_simulation(List<Robot> liste, Carte map) {
 		robots = liste;
 		carte = map;
+	}
+	
+	public void initialiser_simulation(List<Robot> liste_robots, Carte map, List<Obstacle> liste_obstacles) {
+		robots = liste_robots;
+		carte = map;
+		obstacles = liste_obstacles;
 	}
 	
 	public void faire_evoluer() {
@@ -53,6 +64,10 @@ public class Simulateur {
 			System.out.println("Information robot " + robot.getId_robot());
 			System.out.println("x=" + robot.getPos_robot().x + " y=" + robot.getPos_robot().y);
 			System.out.println(robot.getOrientation_robot());
+		}
+		for (Obstacle obstacle : obstacles){
+			System.out.println("Information obstacle \ntaille : " + obstacle.getTaille());
+			System.out.println("x=" + obstacle.getPosition().x + " y=" + obstacle.getPosition().y);
 		}
 	}
 }

@@ -28,7 +28,7 @@ public class ProgrammeServeur {
 
 	public void run() {
 		GenerateurParDefaut parametre_par_defaut = new GenerateurParDefaut(simulateur);
-        simulateur.initialiser_simulation(parametre_par_defaut.get_robots(), parametre_par_defaut.get_carte());
+        simulateur.initialiser_simulation(parametre_par_defaut.get_robots(), parametre_par_defaut.get_carte(), parametre_par_defaut.get_obstacles());
         while (true) {
         	/////////////////////////////////////////////////////////////////
         	simulateur.faire_evoluer();

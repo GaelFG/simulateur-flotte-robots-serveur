@@ -67,6 +67,14 @@ public class Robot {
 				}		
 			}
 		}	
+		
+		for (Obstacle o : this.simulation.get_liste_obstacles()){
+			if ((futur_x > o.getPosition().x - 0.1 && futur_x < o.getPosition().x + 0.1) || (futur_y > o.getPosition().y - 0.1 && futur_y < o.getPosition().y + 0.1)){
+				futur_x = this.position.x;
+				futur_y = this.position.y;
+			}		
+		}
+		
 		while (futur_x > this.simulation.get_carte().get_largeur()){
 			futur_x = futur_x - this.simulation.get_carte().get_largeur();
 		}
