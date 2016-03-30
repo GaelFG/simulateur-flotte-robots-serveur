@@ -11,14 +11,15 @@ public class ProgrammeServeur {
     {
         System.out.println( "Hello World!" );
         ProgrammeServeur programme = new ProgrammeServeur();
-        programme.run();
+        //programme.run();
     }
 	
 	private Server serveur_kryo;
 	private Simulateur simulateur;
-	/** Le framerate du serveur, baissÃ© pour les tests*/
+	/** Le framerate du serveur, baissé pour les tests*/
 	private static int FRAMERATE = 30;
 	private static int TEMPS_ENTRE_DEUX_FRAMES = 1000/FRAMERATE;
+	private boolean etat_simulation;
 	
 	public ProgrammeServeur() {
 		initialiser_serveur_kryo(8073);
@@ -27,13 +28,15 @@ public class ProgrammeServeur {
 	}
 
 	public void run() {
+		System.out.println("On run le serveur !");
 		GenerateurParDefaut parametre_par_defaut = new GenerateurParDefaut(simulateur);
         simulateur.initialiser_simulation(parametre_par_defaut.get_robots(), parametre_par_defaut.get_carte(), parametre_par_defaut.get_obstacles());
-        while (true) {
+        while (etat_simulation) {
         	/////////////////////////////////////////////////////////////////
         	simulateur.faire_evoluer();
         	serveur_kryo.sendToAllTCP(simulateur.calculer_etat_simulation());
 			try {
+				//System.out.println("calcul d'un tour");
 				Thread.sleep(TEMPS_ENTRE_DEUX_FRAMES);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
@@ -41,6 +44,11 @@ public class ProgrammeServeur {
 			}
 			///////////////////////////////////////////////
 		}
+	}
+	
+	public void set_etat_simulation(boolean etat) {
+		System.out.println("set etat simulation");
+		this.etat_simulation = etat;
 	}
 	
 	private void initialiser_serveur_kryo(int port_tcp) {
@@ -54,8 +62,8 @@ public class ProgrammeServeur {
 		}
 	}
 	
-	/** L'ecouteur dÃ©finit la facon dont le serveur Ã©agit aux messages clients recus. */
+	/** L'ecouteur définit la facon dont le serveur réagit aux messages clients recus. */
 	private void definir_ecouteur_serveur_kryo() {
-		serveur_kryo.addListener(new EcouteurReseau());
+		serveur_kryo.addListener(new EcouteurReseau(this));
 	}
 }
