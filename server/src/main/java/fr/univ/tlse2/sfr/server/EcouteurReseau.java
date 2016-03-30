@@ -7,20 +7,20 @@ import fr.univ.tlse2.sfr.communication.DemarrerSimulation;
 import fr.univ.tlse2.sfr.communication.MessageTexte;
 
 /**
- * L'écouteur réseau du serveur. Définit la réaction du serveur aux messages envoyés.
+ * L'ï¿½couteur rï¿½seau du serveur. Dï¿½finit la rï¿½action du serveur aux messages envoyï¿½s.
  */
 public class EcouteurReseau extends Listener{
 	private ProgrammeServeur programme_serveur;
 	public EcouteurReseau (ProgrammeServeur programme_serveur) {
 		this.programme_serveur = programme_serveur;
 	}
-	/** Réagit à la reception d'un objet sérialisé. */
+	/** Rï¿½agit ï¿½ la reception d'un objet sï¿½rialisï¿½. */
 	 public void received (Connection connection, Object object) {
          System.out.println("le serveur recoit qqch");
 		 if (object instanceof DemarrerSimulation) {
        	  DemarrerSimulation demande_demarrage_simulation = (DemarrerSimulation)object;
-            System.out.println("Demande de démarrage de simuation appellée " + demande_demarrage_simulation.nom_simulation);
-            MessageTexte reponse = new MessageTexte("Demande de démarrage de simulation recu !");
+            System.out.println("Demande de dï¿½marrage de simuation appellï¿½e " + demande_demarrage_simulation.nom_simulation);
+            MessageTexte reponse = new MessageTexte("Demande de dï¿½marrage de simulation recu !");
             connection.sendTCP(reponse);
             programme_serveur.set_etat_simulation(true);
             programme_serveur.run();
@@ -28,14 +28,16 @@ public class EcouteurReseau extends Listener{
 		 else if (object instanceof MessageTexte) {
 			 System.out.println(((MessageTexte) object).get_contenu());
 			 String message = ((MessageTexte)object).get_contenu();
-			 if (message.equals("STOP"))
-			 {
+			 if (message.equals("STOP")) {
 				 programme_serveur.set_etat_simulation(false);
-			 }
-		 }
-		 else
-		 {
+			 }			 
+		 } else {
 			 System.err.println("commande inconnue");
 		 }
       }
+
+	 @Override
+	 public void disconnected (Connection connection) {
+		 programme_serveur.set_etat_simulation(false);
+	}
 }
