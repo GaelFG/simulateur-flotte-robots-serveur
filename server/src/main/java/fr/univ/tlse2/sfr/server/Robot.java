@@ -6,6 +6,7 @@ import fr.univ.tlse2.sfr.communication.EtatRobot;
 import fr.univ.tlse2.sfr.communication.Position;
 
 public class Robot {
+	private static int RADIUS_ROBOT_EN_PX = 16;
 	private int id;
 	private Position position;
 	/** orientation en degres*/
@@ -61,7 +62,7 @@ public class Robot {
 		
 		for (Robot r : this.simulation.getListe_robots()){
 			if (this.id != r.id){
-				if ((futur_x > r.position.x - 0.1 && futur_x < r.position.x + 0.1) || (futur_y > r.position.y - 0.1 && futur_y < r.position.y + 0.1)){
+				if ((futur_x > r.position.x - RADIUS_ROBOT_EN_PX && futur_x < r.position.x + RADIUS_ROBOT_EN_PX) && (futur_y > r.position.y - RADIUS_ROBOT_EN_PX && futur_y < r.position.y + RADIUS_ROBOT_EN_PX)){
 					futur_x = this.position.x;
 					futur_y = this.position.y;
 				}		
@@ -69,7 +70,7 @@ public class Robot {
 		}	
 		
 		for (Obstacle o : this.simulation.get_liste_obstacles()){
-			if ((futur_x > o.getPosition().x - 1 && futur_x < o.getPosition().x + 1) || (futur_y > o.getPosition().y - 1 && futur_y < o.getPosition().y + 1)){
+			if ((futur_x > o.getPosition().x - o.getTaille() && futur_x < o.getPosition().x + o.getTaille()) && (futur_y > o.getPosition().y - o.getTaille() && futur_y < o.getPosition().y + o.getTaille())){
 				futur_x = this.position.x;
 				futur_y = this.position.y;
 			}		

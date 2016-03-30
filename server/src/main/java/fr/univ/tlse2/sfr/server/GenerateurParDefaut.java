@@ -16,26 +16,28 @@ public class GenerateurParDefaut {
 		carte = new Carte();
 		robots = new LinkedList<Robot>();
 
-		robots.add(new Robot(1, new Position(0.0,0.0),45, 0.5, simulation));
-		robots.add(new Robot(2, new Position(1.0,1.0),45, 0.5, simulation));
+		robots.add(new Robot(1, new Position(50.0,0.0),45, 0.5, simulation));
+		robots.add(new Robot(2, new Position(100.0,1.0),45, 0.5, simulation));
 		
-		robots.add(new Robot(2, new Position(3.0,1.0),45, 0.5, simulation));
-		robots.add(new Robot(2, new Position(2.0,1.0),45, 0.5, simulation));
-		robots.add(new Robot(2, new Position(4.0,1.0),45, 0.5, simulation));
-		robots.add(new Robot(2, new Position(5.0,1.0),45, 0.5, simulation));
-		robots.add(new Robot(2, new Position(6.0,1.0),45, 0.5, simulation));
-		robots.add(new Robot(2, new Position(7.0,1.0),45, 0.5, simulation));
-		robots.add(new Robot(2, new Position(8.0,1.0),45, 0.5, simulation));
-		robots.add(new Robot(2, new Position(9.0,1.0),45, 0.5, simulation));
-		robots.add(new Robot(2, new Position(10.0,1.0),45, 0.5, simulation));
-		robots.add(new Robot(2, new Position(11.0,1.0),45, 0.5, simulation));
-		robots.add(new Robot(2, new Position(1.0,5.0),45, 0.5, simulation));
-		robots.add(new Robot(2, new Position(1.0,7.0),45, 0.5, simulation));
-		robots.add(new Robot(2, new Position(1.0,9.0),45, 0.5, simulation));
+		robots.add(new Robot(2, new Position(300.0,100.0),45, 0.5, simulation));
+		robots.add(new Robot(2, new Position(200.0,501.0),45, 0.5, simulation));
+		robots.add(new Robot(2, new Position(400.0,61.0),45, 0.5, simulation));
+		robots.add(new Robot(2, new Position(500.0,401.0),45, 0.5, simulation));
+		robots.add(new Robot(2, new Position(600.0,341.0),45, 0.5, simulation));
+		robots.add(new Robot(2, new Position(700.0,431.0),45, 0.5, simulation));
+		robots.add(new Robot(2, new Position(800.0,121.0),45, 0.5, simulation));
+		robots.add(new Robot(2, new Position(900.0,211.0),45, 0.5, simulation));
+		robots.add(new Robot(2, new Position(1000.0,221.0),45, 0.5, simulation));
+		robots.add(new Robot(2, new Position(1100.0,441.0),45, 0.5, simulation));
+		robots.add(new Robot(2, new Position(1000.0,555.0),45, 0.5, simulation));
+		robots.add(new Robot(2, new Position(1200.0,70.0),45, 0.5, simulation));
+		robots.add(new Robot(2, new Position(1400.0,549.0),45, 0.5, simulation));
 		
 		obstacles = new LinkedList<Obstacle>();
-		obstacles.add(new Obstacle(1, new Position(10.0,3.0)));
-		obstacles.add(new Obstacle(1, new Position(4.0,12.0)));
+		obstacles.add(new Obstacle(10, new Position(600.0,40.0)));
+		obstacles.add(new Obstacle(10, new Position(400.0,450.0)));
+		obstacles.add(new Obstacle(10, new Position(300.0,120.0)));
+		obstacles.add(new Obstacle(10, new Position(200.0,1000.0)));
 	}
 	
 	//methode retournant la liste des robots
