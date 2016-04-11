@@ -4,6 +4,7 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.FrameworkMessage;
 import com.esotericsoftware.kryonet.Listener;
 
+import fr.univ.tlse2.sfr.communication.ArreterSimulation;
 import fr.univ.tlse2.sfr.communication.DemarrerSimulation;
 import fr.univ.tlse2.sfr.communication.MessageTexte;
 
@@ -27,12 +28,11 @@ public class EcouteurReseau extends Listener{
             programme_serveur.run();
          }
 		 else if (object instanceof MessageTexte) {
-			 System.out.println(((MessageTexte) object).get_contenu());
 			 String message = ((MessageTexte)object).get_contenu();
-			 if (message.equals("STOP"))
-			 {
-				 programme_serveur.set_etat_simulation(false);
-			 }
+			 System.out.println(message);
+		 } 
+		 else if (object instanceof ArreterSimulation) {
+			 programme_serveur.set_etat_simulation(false);
 		 }
 		 else if (object instanceof FrameworkMessage)
 		 {
@@ -44,4 +44,9 @@ public class EcouteurReseau extends Listener{
 			 System.err.println("commande inconnue");
 		 }
       }
+
+	 @Override
+	 public void disconnected (Connection connection) {
+		 programme_serveur.set_etat_simulation(false);
+	}
 }
