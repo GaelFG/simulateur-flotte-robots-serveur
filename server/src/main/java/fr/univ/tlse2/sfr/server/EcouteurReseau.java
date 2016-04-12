@@ -1,6 +1,7 @@
 package fr.univ.tlse2.sfr.server;
 
 import com.esotericsoftware.kryonet.Connection;
+import com.esotericsoftware.kryonet.FrameworkMessage;
 import com.esotericsoftware.kryonet.Listener;
 
 import fr.univ.tlse2.sfr.communication.ArreterSimulation;
@@ -29,7 +30,8 @@ public class EcouteurReseau extends Listener{
 		 else if (object instanceof MessageTexte) {
 			 String message = ((MessageTexte)object).get_contenu();
 			 System.out.println(message);
-		 } else if (object instanceof ArreterSimulation) {
+		 } 
+		 else if (object instanceof ArreterSimulation) {
 			 programme_serveur.set_etat_simulation(false);
 			 System.out.println("Demande de fermeture de la simulation courante");
 		 } else {
