@@ -16,7 +16,7 @@ public class ProgrammeServeur {
 	
 	private Server serveur_kryo;
 	private Simulateur simulateur;
-	/** Le framerate du serveur, baissé pour les tests*/
+	/** Le framerate du serveur, baissï¿½ pour les tests*/
 	private static int FRAMERATE = 30;
 	private static int TEMPS_ENTRE_DEUX_FRAMES = 1000/FRAMERATE;
 	private boolean etat_simulation;
@@ -28,26 +28,22 @@ public class ProgrammeServeur {
 	}
 
 	public void run() {
-		System.out.println("On run le serveur !");
+		System.out.println("On dÃ©marre une simulation sur le serveur !");
 		GenerateurParDefaut parametre_par_defaut = new GenerateurParDefaut(simulateur);
         simulateur.initialiser_simulation(parametre_par_defaut.get_robots(), parametre_par_defaut.get_carte(), parametre_par_defaut.get_obstacles());
         while (etat_simulation) {
-        	/////////////////////////////////////////////////////////////////
         	simulateur.faire_evoluer();
         	serveur_kryo.sendToAllTCP(simulateur.calculer_etat_simulation());
 			try {
-				//System.out.println("calcul d'un tour");
 				Thread.sleep(TEMPS_ENTRE_DEUX_FRAMES);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			///////////////////////////////////////////////
 		}
 	}
 	
-	public void set_etat_simulation(boolean etat) {
-		System.out.println("set etat simulation");
+	public synchronized void set_etat_simulation(boolean etat) {
+		System.out.println("modification de l'etat simulation");
 		this.etat_simulation = etat;
 	}
 	
@@ -62,7 +58,7 @@ public class ProgrammeServeur {
 		}
 	}
 	
-	/** L'ecouteur définit la facon dont le serveur réagit aux messages clients recus. */
+	/** L'ecouteur dï¿½finit la facon dont le serveur rï¿½agit aux messages clients recus. */
 	private void definir_ecouteur_serveur_kryo() {
 		serveur_kryo.addListener(new EcouteurReseau(this));
 	}
