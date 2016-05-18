@@ -6,6 +6,7 @@ import java.util.List;
 import fr.univ.tlse2.sfr.communication.EtatObstacle;
 import fr.univ.tlse2.sfr.communication.EtatRobot;
 import fr.univ.tlse2.sfr.communication.EtatSimulation;
+import fr.univ.tlse2.sfr.communication.Position;
 
 public class Simulateur {
 	private List<Robot> robots;
@@ -25,6 +26,14 @@ public class Simulateur {
 	
 	public Carte get_carte(){
 		return carte;
+	}
+	
+	public void ajouter_robot(Position position){
+		robots.add(new Robot(robots.size()+1, position, 45, 0.5, this));
+	}
+	
+	public void ajouter_obstacle(Position position){
+		obstacles.add(new Obstacle(10,position));
 	}
 
 	public void initialiser_simulation(List<Robot> liste, Carte map) {
