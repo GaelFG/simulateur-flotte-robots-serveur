@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import com.esotericsoftware.kryonet.Server;
 import fr.univ.tlse2.sfr.communication.EnregistreurKryo;
+import fr.univ.tlse2.sfr.communication.ParametresSimulation;
 
 public class ProgrammeServeur {
     
@@ -20,6 +21,7 @@ public class ProgrammeServeur {
 	private static int FRAMERATE = 30;
 	private static int TEMPS_ENTRE_DEUX_FRAMES = 1000/FRAMERATE;
 	private boolean etat_simulation;
+	private boolean en_cours_d_execution;
 	
 	public ProgrammeServeur() {
 		initialiser_serveur_kryo(8073);
@@ -27,7 +29,7 @@ public class ProgrammeServeur {
 		simulateur = new Simulateur();
 	}
 
-	public void run() {
+	public void demarrer_une_simulation(ParametresSimulation parametres) {
 		System.out.println("On démarre une simulation sur le serveur !");
 		GenerateurParDefaut parametre_par_defaut = new GenerateurParDefaut(simulateur);
         simulateur.initialiser_simulation(parametre_par_defaut.get_robots(), parametre_par_defaut.get_carte(), parametre_par_defaut.get_obstacles());
@@ -39,6 +41,15 @@ public class ProgrammeServeur {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+		}
+	}
+	
+	public void executer() {
+		System.out.println("On démarre le serveur !");
+		en_cours_d_execution = true;
+		while (en_cours_d_execution) {
+			// Si on as des demandes client dans le buffer on les traite
+			// Si il y a une simulation en cours, on la deroule
 		}
 	}
 	
@@ -58,7 +69,7 @@ public class ProgrammeServeur {
 		}
 	}
 	
-	/** L'ecouteur d�finit la facon dont le serveur r�agit aux messages clients recus. */
+	/** L'ecouteur d�finit la facon dont le serveur réagit aux messages clients recus. */
 	private void definir_ecouteur_serveur_kryo() {
 		serveur_kryo.addListener(new EcouteurReseau(this));
 	}
