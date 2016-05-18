@@ -4,9 +4,11 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.FrameworkMessage;
 import com.esotericsoftware.kryonet.Listener;
 
+import fr.univ.tlse2.sfr.communication.AjouterRobot;
 import fr.univ.tlse2.sfr.communication.ArreterSimulation;
 import fr.univ.tlse2.sfr.communication.DemarrerSimulation;
 import fr.univ.tlse2.sfr.communication.MessageTexte;
+import fr.univ.tlse2.sfr.communication.PauseSimulation;
 
 /**
  * L'écouteur réseau du serveur. Définit la réaction du serveur aux messages envoyés.
@@ -34,6 +36,12 @@ public class EcouteurReseau extends Listener{
 		 else if (object instanceof ArreterSimulation) {
 			 programme_serveur.set_etat_simulation(false);
 			 System.out.println("Demande de fermeture de la simulation courante");
+		 }
+		 else if (object instanceof PauseSimulation) {
+			 System.out.println("on veut mettre en pause biatch");
+		 }
+		 else if (object instanceof AjouterRobot) {
+			 System.out.println("on veut ajouter un robot");
 		 } else {
 			 System.err.println("commande inconnue");
 		 }
