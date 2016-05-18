@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.esotericsoftware.kryonet.Server;
 import fr.univ.tlse2.sfr.communication.EnregistreurKryo;
 import fr.univ.tlse2.sfr.communication.ParametresSimulation;
+import fr.univ.tlse2.sfr.communication.Position;
 
 public class ProgrammeServeur {
     
@@ -70,5 +71,13 @@ public class ProgrammeServeur {
 	/** L'ecouteur d�finit la facon dont le serveur réagit aux messages clients recus. */
 	private void definir_ecouteur_serveur_kryo() {
 		serveur_kryo.addListener(new EcouteurReseau(this));
+	}
+
+	public void ajouter_robot(Position position) {
+		simulateur.ajouter_robot(position);
+	}
+
+	public void ajouter_obstacle(Position position) {
+		simulateur.ajouter_obstacle(position);
 	}
 }

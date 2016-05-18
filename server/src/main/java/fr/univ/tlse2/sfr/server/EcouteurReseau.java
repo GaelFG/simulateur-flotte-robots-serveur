@@ -3,6 +3,7 @@ package fr.univ.tlse2.sfr.server;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 
+import fr.univ.tlse2.sfr.communication.AjouterObstacle;
 import fr.univ.tlse2.sfr.communication.AjouterRobot;
 import fr.univ.tlse2.sfr.communication.ArreterSimulation;
 import fr.univ.tlse2.sfr.communication.DemarrerSimulation;
@@ -40,6 +41,11 @@ public class EcouteurReseau extends Listener{
 		 }
 		 else if (object instanceof AjouterRobot) {
 			 System.out.println("on veut ajouter un robot");
+			 programme_serveur.ajouter_robot(((AjouterRobot)object).position);
+		 }
+		 else if (object instanceof AjouterObstacle) {
+			 System.out.println("on veut ajouter un obstacle");
+			 programme_serveur.ajouter_obstacle(((AjouterObstacle)object).position);
 		 } else {
 			 System.err.println("commande inconnue");
 		 }
