@@ -11,6 +11,7 @@ public class GenerateurParDefaut {
 	private List<Obstacle> obstacles;
 	private Carte carte;
 	private Simulateur simulation;
+	private final int TAILLE_OBSTACLE = 16; //TODO avec l'algo de colision actuel il est umperatif que la taille des bstacle soit toujour de la meme taille que les robots
 	
 	public GenerateurParDefaut(Simulateur simu, ParametresSimulation parametres){
 		this.simulation = simu;
@@ -20,19 +21,19 @@ public class GenerateurParDefaut {
 		robots = new LinkedList<Robot>();
 		double x_base = 10.0;
 		double y_base = 10.0;
-		for (int i = 1 ; i <= parametres.nombre_obstacles ; i++) {
-			x_base += 30;
-			y_base += 30;
+		for (int i = 1 ; i <= parametres.nombre_robots ; i++) {
 			robots.add(new Robot(i, new Position(x_base,y_base),45, 0.5, simulation));
+			x_base += 48;
+			y_base += 48;
 		}
 		
 		obstacles = new LinkedList<Obstacle>();
 		x_base = 55.0;
 		y_base = 25.0;
-		for (int i = 1 ; i <= parametres.nombre_robots ; i++) {
-			x_base += 30;
-			y_base += 30;
-			obstacles.add(new Obstacle(10, new Position(x_base,y_base)));
+		for (int i = 1 ; i <= parametres.nombre_obstacles ; i++) {
+			obstacles.add(new Obstacle(TAILLE_OBSTACLE, new Position(x_base,y_base)));
+			x_base += 48;
+			y_base += 48;
 		}
 	}
 	

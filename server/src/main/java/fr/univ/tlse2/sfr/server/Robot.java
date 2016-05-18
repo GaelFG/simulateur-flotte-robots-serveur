@@ -53,6 +53,7 @@ public class Robot {
 		this.se_deplacer(vitesse);
 	}
 
+	//TODO detection des colision merdique
 	private void se_deplacer(double vitesse) {
 		double futur_x;
 		double futur_y; 
@@ -60,22 +61,30 @@ public class Robot {
 		futur_x = this.position.x + Math.cos(Math.toRadians(orientation)) * vitesse;
 		futur_y = this.position.y + Math.sin(Math.toRadians(orientation)) * vitesse;
 		
+		//
+		boolean a_percute_un_truc = false;
 		// On vérifie qu'il ne percute pas un autre robot
 		for (Robot r : this.simulation.getListe_robots()){
 			if (this.id != r.id){
-				if ((futur_x > r.position.x - RADIUS_ROBOT_EN_PX && futur_x < r.position.x + RADIUS_ROBOT_EN_PX) && (futur_y > r.position.y - RADIUS_ROBOT_EN_PX && futur_y < r.position.y + RADIUS_ROBOT_EN_PX)){
+				if (Math.abs(futur_x - r.position.x) < (RADIUS_ROBOT_EN_PX*2) && Math.abs(futur_y - r.position.y) < (RADIUS_ROBOT_EN_PX*2)) {
+				    // Collision
 					futur_x = this.position.x;
 					futur_y = this.position.y;
-				}		
+				} else {
+					
+				}
 			}
 		}	
 		
 		// On vérifie qu'il ne percute pas un obstacle
 		for (Obstacle o : this.simulation.get_liste_obstacles()){
-			if ((futur_x > o.getPosition().x - o.getTaille() && futur_x < o.getPosition().x + o.getTaille()) && (futur_y > o.getPosition().y - o.getTaille() && futur_y < o.getPosition().y + o.getTaille())){
+			if (Math.abs(futur_x - o.getPosition().x) < (RADIUS_ROBOT_EN_PX*2) && Math.abs(futur_y - o.getPosition().y) < (RADIUS_ROBOT_EN_PX*2)) {
+			    // Collision
 				futur_x = this.position.x;
 				futur_y = this.position.y;
-			}		
+			} else {
+
+			}
 		}
 		
 		// Gestion des débordements de la carte
@@ -96,24 +105,25 @@ public class Robot {
 			
 		this.position = new Position(futur_x, futur_y);
 	}
-
+	
 	private void determiner_nouvelle_orientation() {
 		// on determine la nouvelle orientation
 		this.random_orientation = new Random();
 		this.coef_orientation = random_orientation.nextInt(101);
 		//boolean coef_orientationisbetween = 
-		if (0 <= this.coef_orientation && this.coef_orientation <= 5)
+		if (0 <= this.coef_orientation && this.coef_orientation <= 1)
 			this.orientation = (orientation - 60) % 360;
-		else if (6 <= this.coef_orientation && this.coef_orientation <= 15)
+		else if (2 <= this.coef_orientation && this.coef_orientation <= 3)
 			this.orientation = (orientation - 30) % 360;
-		else if (86 <= this.coef_orientation && this.coef_orientation <= 95)
+		else if (97 <= this.coef_orientation && this.coef_orientation <= 98)
 			this.orientation = (orientation + 30) % 360;
-		else if (96 <= this.coef_orientation && this.coef_orientation <= 100)
+		else if (99 <= this.coef_orientation && this.coef_orientation <= 100)
 			this.orientation = (orientation + 60) % 360;
 	}
 
 	public EtatRobot calculer_etat_robot() {
 		// TODO Auto-generated method stub
 		return new EtatRobot(id, position, orientation);
-	}	
+	}
+	
 }
