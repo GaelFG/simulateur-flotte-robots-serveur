@@ -3,6 +3,7 @@ package fr.univ.tlse2.sfr.server;
 import java.util.LinkedList;
 import java.util.List;
 
+import fr.univ.tlse2.sfr.communication.ParametresSimulation;
 import fr.univ.tlse2.sfr.communication.Position;
 
 public class GenerateurParDefaut {
@@ -11,33 +12,28 @@ public class GenerateurParDefaut {
 	private Carte carte;
 	private Simulateur simulation;
 	
-	public GenerateurParDefaut(Simulateur simu){
+	public GenerateurParDefaut(Simulateur simu, ParametresSimulation parametres){
 		this.simulation = simu;
 		carte = new Carte();
-		robots = new LinkedList<Robot>();
-
-		robots.add(new Robot(1, new Position(50.0,0.0),45, 0.5, simulation));
-		robots.add(new Robot(2, new Position(100.0,1.0),45, 0.5, simulation));
 		
-		robots.add(new Robot(2, new Position(300.0,100.0),45, 0.5, simulation));
-		robots.add(new Robot(2, new Position(200.0,501.0),45, 0.5, simulation));
-		robots.add(new Robot(2, new Position(400.0,61.0),45, 0.5, simulation));
-		robots.add(new Robot(2, new Position(500.0,401.0),45, 0.5, simulation));
-		robots.add(new Robot(2, new Position(600.0,341.0),45, 0.5, simulation));
-		robots.add(new Robot(2, new Position(700.0,431.0),45, 0.5, simulation));
-		robots.add(new Robot(2, new Position(800.0,121.0),45, 0.5, simulation));
-		robots.add(new Robot(2, new Position(900.0,211.0),45, 0.5, simulation));
-		robots.add(new Robot(2, new Position(1000.0,221.0),45, 0.5, simulation));
-		robots.add(new Robot(2, new Position(1100.0,441.0),45, 0.5, simulation));
-		robots.add(new Robot(2, new Position(1000.0,555.0),45, 0.5, simulation));
-		robots.add(new Robot(2, new Position(1200.0,70.0),45, 0.5, simulation));
-		robots.add(new Robot(2, new Position(1400.0,549.0),45, 0.5, simulation));
+		
+		robots = new LinkedList<Robot>();
+		double x_base = 10.0;
+		double y_base = 10.0;
+		for (int i = 1 ; i <= parametres.nombre_obstacles ; i++) {
+			x_base += 30;
+			y_base += 30;
+			robots.add(new Robot(i, new Position(x_base,y_base),45, 0.5, simulation));
+		}
 		
 		obstacles = new LinkedList<Obstacle>();
-		obstacles.add(new Obstacle(10, new Position(600.0,40.0)));
-		obstacles.add(new Obstacle(10, new Position(400.0,450.0)));
-		obstacles.add(new Obstacle(10, new Position(300.0,120.0)));
-		obstacles.add(new Obstacle(10, new Position(200.0,1000.0)));
+		x_base = 55.0;
+		y_base = 25.0;
+		for (int i = 1 ; i <= parametres.nombre_robots ; i++) {
+			x_base += 30;
+			y_base += 30;
+			obstacles.add(new Obstacle(10, new Position(x_base,y_base)));
+		}
 	}
 	
 	//methode retournant la liste des robots

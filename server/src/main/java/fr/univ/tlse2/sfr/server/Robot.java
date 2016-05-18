@@ -60,6 +60,7 @@ public class Robot {
 		futur_x = this.position.x + Math.cos(Math.toRadians(orientation)) * vitesse;
 		futur_y = this.position.y + Math.sin(Math.toRadians(orientation)) * vitesse;
 		
+		// On vérifie qu'il ne percute pas un autre robot
 		for (Robot r : this.simulation.getListe_robots()){
 			if (this.id != r.id){
 				if ((futur_x > r.position.x - RADIUS_ROBOT_EN_PX && futur_x < r.position.x + RADIUS_ROBOT_EN_PX) && (futur_y > r.position.y - RADIUS_ROBOT_EN_PX && futur_y < r.position.y + RADIUS_ROBOT_EN_PX)){
@@ -69,6 +70,7 @@ public class Robot {
 			}
 		}	
 		
+		// On vérifie qu'il ne percute pas un obstacle
 		for (Obstacle o : this.simulation.get_liste_obstacles()){
 			if ((futur_x > o.getPosition().x - o.getTaille() && futur_x < o.getPosition().x + o.getTaille()) && (futur_y > o.getPosition().y - o.getTaille() && futur_y < o.getPosition().y + o.getTaille())){
 				futur_x = this.position.x;
@@ -76,6 +78,9 @@ public class Robot {
 			}		
 		}
 		
+		// Gestion des débordements de la carte
+		// Si un robot dépasse les bords de la carte, il est ramené de 
+		// l'autre coté, comme si la carte est une sphère
 		while (futur_x > this.simulation.get_carte().get_largeur()){
 			futur_x = futur_x - this.simulation.get_carte().get_largeur();
 		}

@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import com.esotericsoftware.kryonet.Server;
 import fr.univ.tlse2.sfr.communication.EnregistreurKryo;
+import fr.univ.tlse2.sfr.communication.ParametresSimulation;
+import fr.univ.tlse2.sfr.communication.Position;
 
 public class ProgrammeServeur {
     
@@ -11,15 +13,16 @@ public class ProgrammeServeur {
     {
         System.out.println( "Hello World!" );
         ProgrammeServeur programme = new ProgrammeServeur();
-        //programme.run();
+        programme.executer();
     }
 	
 	private Server serveur_kryo;
 	private Simulateur simulateur;
-	/** Le framerate du serveur, baiss� pour les tests*/
+	/** Le framerate du serveur, baissé pour les tests*/
 	private static int FRAMERATE = 30;
 	private static int TEMPS_ENTRE_DEUX_FRAMES = 1000/FRAMERATE;
 	private boolean etat_simulation;
+	private boolean en_cours_d_execution;
 	
 	public ProgrammeServeur() {
 		initialiser_serveur_kryo(8073);
@@ -27,13 +30,20 @@ public class ProgrammeServeur {
 		simulateur = new Simulateur();
 	}
 
-	public void run() {
+	public void creer_une_simulation(ParametresSimulation parametres) {
 		System.out.println("On démarre une simulation sur le serveur !");
-		GenerateurParDefaut parametre_par_defaut = new GenerateurParDefaut(simulateur);
+		GenerateurParDefaut parametre_par_defaut = new GenerateurParDefaut(simulateur, parametres);
         simulateur.initialiser_simulation(parametre_par_defaut.get_robots(), parametre_par_defaut.get_carte(), parametre_par_defaut.get_obstacles());
-        while (etat_simulation) {
-        	simulateur.faire_evoluer();
-        	serveur_kryo.sendToAllTCP(simulateur.calculer_etat_simulation());
+	}
+	
+	public void executer() {
+		System.out.println("On démarre le serveur !");
+		en_cours_d_execution = true;
+		while (en_cours_d_execution) {
+			if (etat_simulation) {
+				simulateur.faire_evoluer();
+	        	serveur_kryo.sendToAllTCP(simulateur.calculer_etat_simulation());
+			}
 			try {
 				Thread.sleep(TEMPS_ENTRE_DEUX_FRAMES);
 			} catch (InterruptedException e) {
@@ -58,8 +68,16 @@ public class ProgrammeServeur {
 		}
 	}
 	
-	/** L'ecouteur d�finit la facon dont le serveur r�agit aux messages clients recus. */
+	/** L'ecouteur d�finit la facon dont le serveur réagit aux messages clients recus. */
 	private void definir_ecouteur_serveur_kryo() {
 		serveur_kryo.addListener(new EcouteurReseau(this));
+	}
+
+	public void ajouter_robot(Position position) {
+		simulateur.ajouter_robot(position);
+	}
+
+	public void ajouter_obstacle(Position position) {
+		simulateur.ajouter_obstacle(position);
 	}
 }
