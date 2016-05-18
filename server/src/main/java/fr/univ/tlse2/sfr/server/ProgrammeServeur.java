@@ -12,7 +12,7 @@ public class ProgrammeServeur {
     {
         System.out.println( "Hello World!" );
         ProgrammeServeur programme = new ProgrammeServeur();
-        //programme.run();
+        programme.executer();
     }
 	
 	private Server serveur_kryo;
@@ -29,27 +29,25 @@ public class ProgrammeServeur {
 		simulateur = new Simulateur();
 	}
 
-	public void demarrer_une_simulation(ParametresSimulation parametres) {
+	public void creer_une_simulation(ParametresSimulation parametres) {
 		System.out.println("On démarre une simulation sur le serveur !");
 		GenerateurParDefaut parametre_par_defaut = new GenerateurParDefaut(simulateur);
         simulateur.initialiser_simulation(parametre_par_defaut.get_robots(), parametre_par_defaut.get_carte(), parametre_par_defaut.get_obstacles());
-        while (etat_simulation) {
-        	simulateur.faire_evoluer();
-        	serveur_kryo.sendToAllTCP(simulateur.calculer_etat_simulation());
-			try {
-				Thread.sleep(TEMPS_ENTRE_DEUX_FRAMES);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
 	}
 	
 	public void executer() {
 		System.out.println("On démarre le serveur !");
 		en_cours_d_execution = true;
 		while (en_cours_d_execution) {
-			// Si on as des demandes client dans le buffer on les traite
-			// Si il y a une simulation en cours, on la deroule
+			if (etat_simulation) {
+				simulateur.faire_evoluer();
+	        	serveur_kryo.sendToAllTCP(simulateur.calculer_etat_simulation());
+			}
+			try {
+				Thread.sleep(TEMPS_ENTRE_DEUX_FRAMES);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	

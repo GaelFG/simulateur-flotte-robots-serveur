@@ -1,7 +1,6 @@
 package fr.univ.tlse2.sfr.server;
 
 import com.esotericsoftware.kryonet.Connection;
-import com.esotericsoftware.kryonet.FrameworkMessage;
 import com.esotericsoftware.kryonet.Listener;
 
 import fr.univ.tlse2.sfr.communication.ArreterSimulation;
@@ -55,8 +54,8 @@ public class EcouteurReseau extends Listener{
 		 System.out.println("Demande de démarrage de simuation appellée " + parametres.nom_simulation);
          MessageTexte reponse = new MessageTexte("Demande de démarrage de simulation bien recue !");
          connection.sendTCP(reponse);
+         programme_serveur.creer_une_simulation(parametres);
          programme_serveur.set_etat_simulation(true);
-         programme_serveur.demarrer_une_simulation(parametres);
 	 }
 	 
 	 private void refuser_de_demarrer_une_simulation(Connection connection) {
