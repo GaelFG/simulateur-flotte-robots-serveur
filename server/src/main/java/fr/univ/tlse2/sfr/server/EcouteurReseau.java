@@ -20,26 +20,27 @@ public class EcouteurReseau extends Listener{
 	}
 	/** Réagit à la reception d'un objet sérialisé */
 	 public void received (Connection connection, Object object) {
-         System.out.println("le serveur recoit qqch");
+		 
 		 if (object instanceof DemarrerSimulation) {
 			traiter_demande_demarrage_simulation((DemarrerSimulation)object, connection);
-         }
-		 else if (object instanceof MessageTexte) {
+
+         } else if (object instanceof MessageTexte) {
 			 traiter_message_texte((MessageTexte)object);
+			 
 		 } else if (object instanceof ArreterSimulation) {
 			 traiter_demande_arret_simulation();
-			 String message = ((MessageTexte)object).get_contenu();
-			 System.out.println(message);
-		 } 
-		 else if (object instanceof ArreterSimulation) {
+			 
+		 } else if (object instanceof ArreterSimulation) {
 			 programme_serveur.set_etat_simulation(false);
 			 System.out.println("Demande de fermeture de la simulation courante");
-		 }
-		 else if (object instanceof PauseSimulation) {
-			 System.out.println("on veut mettre en pause biatch");
-		 }
-		 else if (object instanceof AjouterRobot) {
+			 
+		 } else if (object instanceof PauseSimulation) {
+			 System.out.println("Demande de mise en pause");
+			 programme_serveur.set_etat_simulation(false);
+			 
+		 } else if (object instanceof AjouterRobot) {
 			 System.out.println("on veut ajouter un robot");
+			 
 		 } else {
 			 System.err.println("commande inconnue");
 		 }
@@ -47,6 +48,7 @@ public class EcouteurReseau extends Listener{
 
 	 @Override
 	 public void disconnected (Connection connection) {
+		 System.out.println("Perte de la connexion au client");
 		 programme_serveur.set_etat_simulation(false);
 	}
 	
