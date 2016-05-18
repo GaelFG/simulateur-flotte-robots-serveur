@@ -31,7 +31,7 @@ public class ProgrammeServeur {
 
 	public void creer_une_simulation(ParametresSimulation parametres) {
 		System.out.println("On démarre une simulation sur le serveur !");
-		GenerateurParDefaut parametre_par_defaut = new GenerateurParDefaut(simulateur);
+		GenerateurParDefaut parametre_par_defaut = new GenerateurParDefaut(simulateur, parametres);
         simulateur.initialiser_simulation(parametre_par_defaut.get_robots(), parametre_par_defaut.get_carte(), parametre_par_defaut.get_obstacles());
 	}
 	
