@@ -19,19 +19,19 @@ public class GenerateurParDefaut {
 		robots.add(new Robot(1, new Position(50.0,0.0),45, 0.5, simulation));
 		robots.add(new Robot(2, new Position(100.0,1.0),45, 0.5, simulation));
 		
-		robots.add(new Robot(2, new Position(300.0,100.0),45, 0.5, simulation));
-		robots.add(new Robot(2, new Position(200.0,501.0),45, 0.5, simulation));
-		robots.add(new Robot(2, new Position(400.0,61.0),45, 0.5, simulation));
-		robots.add(new Robot(2, new Position(500.0,401.0),45, 0.5, simulation));
-		robots.add(new Robot(2, new Position(600.0,341.0),45, 0.5, simulation));
-		robots.add(new Robot(2, new Position(700.0,431.0),45, 0.5, simulation));
-		robots.add(new Robot(2, new Position(800.0,121.0),45, 0.5, simulation));
-		robots.add(new Robot(2, new Position(900.0,211.0),45, 0.5, simulation));
-		robots.add(new Robot(2, new Position(1000.0,221.0),45, 0.5, simulation));
-		robots.add(new Robot(2, new Position(1100.0,441.0),45, 0.5, simulation));
-		robots.add(new Robot(2, new Position(1000.0,555.0),45, 0.5, simulation));
-		robots.add(new Robot(2, new Position(1200.0,70.0),45, 0.5, simulation));
-		robots.add(new Robot(2, new Position(1400.0,549.0),45, 0.5, simulation));
+		robots.add(new Robot(3, new Position(300.0,100.0),45, 0.5, simulation));
+		robots.add(new Robot(4, new Position(200.0,501.0),45, 0.5, simulation));
+		robots.add(new Robot(5, new Position(400.0,61.0),45, 0.5, simulation));
+		robots.add(new Robot(6, new Position(500.0,401.0),45, 0.5, simulation));
+		robots.add(new Robot(7, new Position(600.0,341.0),45, 0.5, simulation));
+		robots.add(new Robot(8, new Position(700.0,431.0),45, 0.5, simulation));
+		robots.add(new Robot(9, new Position(800.0,121.0),45, 0.5, simulation));
+		robots.add(new Robot(10, new Position(900.0,211.0),45, 0.5, simulation));
+		robots.add(new Robot(11, new Position(1000.0,221.0),45, 0.5, simulation));
+		robots.add(new Robot(12, new Position(1100.0,441.0),45, 0.5, simulation));
+		robots.add(new Robot(13, new Position(1000.0,555.0),45, 0.5, simulation));
+		robots.add(new Robot(14, new Position(1200.0,70.0),45, 0.5, simulation));
+		robots.add(new Robot(15, new Position(1400.0,549.0),45, 0.5, simulation));
 		
 		obstacles = new LinkedList<Obstacle>();
 		obstacles.add(new Obstacle(10, new Position(600.0,40.0)));
