@@ -60,9 +60,7 @@ public class Robot {
 		
 		futur_x = this.position.x + Math.cos(Math.toRadians(orientation)) * vitesse;
 		futur_y = this.position.y + Math.sin(Math.toRadians(orientation)) * vitesse;
-		
-		//
-		boolean a_percute_un_truc = false;
+
 		// On vérifie qu'il ne percute pas un autre robot
 		for (Robot r : this.simulation.getListe_robots()){
 			if (this.id != r.id){
