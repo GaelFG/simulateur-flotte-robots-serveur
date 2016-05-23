@@ -32,7 +32,15 @@ public class EcouteurReseau extends Listener{
 			 traiter_demande_arret_simulation();
 		 }
 		 else if (object instanceof PauseSimulation) {
-			 System.out.println("on veut mettre en pause biatch");
+			 System.out.println("on veut mettre en pause");
+			 if (programme_serveur.get_etat_simulation()) {//si la simulation est en cours
+				 programme_serveur.set_etat_simulation(false);
+				 //TODO : envoyer message au client pour qu'il change l'interface
+			 }
+			 else {//si elle était en pause
+				 programme_serveur.set_etat_simulation(true);
+				 //TODO : envoyer message au client pour qu'il change l'interface
+			 }
 		 }
 		 else if (object instanceof AjouterRobot) {
 			 System.out.println("on veut ajouter un robot");

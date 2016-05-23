@@ -44,6 +44,14 @@ public class ProgrammeServeur {
 				simulateur.faire_evoluer();
 	        	serveur_kryo.sendToAllTCP(simulateur.calculer_etat_simulation());
 			}
+			else {
+				//si on a mis en pause on wait 1sec histoire de ne pas surcharger le serveur
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}				
+			}
 			try {
 				Thread.sleep(TEMPS_ENTRE_DEUX_FRAMES);
 			} catch (InterruptedException e) {
@@ -79,5 +87,9 @@ public class ProgrammeServeur {
 
 	public void ajouter_obstacle(Position position) {
 		simulateur.ajouter_obstacle(position);
+	}
+	
+	public boolean get_etat_simulation(){
+		return etat_simulation;
 	}
 }
